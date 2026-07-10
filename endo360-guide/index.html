@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Инструкция по подключению med-protocol к 1С БИТ.УМЦ</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f4f6f8;color:#17212b;font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}.loader{width:min(560px,calc(100% - 32px));padding:32px;border:1px solid #dce3e8;border-radius:20px;background:#fff;box-shadow:0 12px 30px rgba(23,33,43,.08);text-align:center}.spinner{width:42px;height:42px;margin:0 auto 18px;border:4px solid #dcebe8;border-top-color:#0b6b63;border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}h1{font-size:1.35rem;margin:0 0 8px}p{margin:0;color:#5c6976}.error{color:#8d2424;background:#fdecec;border:1px solid #efbbbb;border-radius:12px;padding:14px;text-align:left;white-space:pre-wrap}
+  </style>
+</head>
+<body>
+  <main class="loader" id="loader">
+    <div class="spinner" aria-hidden="true"></div>
+    <h1>Загрузка интерактивной инструкции</h1>
+    <p>Подготавливаем автономную версию страницы…</p>
+  </main>
+  <script src="chunk-0.js"></script>
+  <script src="chunk-1.js"></script>
+  <script src="chunk-2.js"></script>
+  <script src="chunk-3.js"></script>
+  <script src="chunk-4.js"></script>
+  <script>
+    (async function(){
+      try{
+        if(!('DecompressionStream' in window)) throw new Error('Браузер не поддерживает распаковку gzip. Откройте страницу в актуальной версии Chrome, Edge, Safari или Firefox.');
+        const b64=(window.__endo360Chunks||[]).join('');
+        if(b64.length!==36616) throw new Error('Не удалось загрузить все части инструкции. Обновите страницу. Код: '+b64.length+'/36616');
+        const raw=atob(b64);
+        const bytes=new Uint8Array(raw.length);
+        for(let i=0;i<raw.length;i++) bytes[i]=raw.charCodeAt(i);
+        const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+        const html=await new Response(stream).text();
+        if(!html.startsWith('<!doctype html>')||!html.includes('Подключение med-protocol к 1С БИТ.УМЦ')) throw new Error('Проверка содержимого инструкции не пройдена.');
+        document.open();
+        document.write(html);
+        document.close();
+      }catch(error){
+        document.getElementById('loader').innerHTML='<h1>Страница не загрузилась</h1><div class="error"></div>';
+        document.querySelector('.error').textContent=error&&error.message?error.message:String(error);
+        console.error(error);
+      }
+    })();
+  </script>
+</body>
+</html>
